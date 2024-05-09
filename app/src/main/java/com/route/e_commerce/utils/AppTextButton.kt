@@ -1,5 +1,6 @@
 package com.route.e_commerce.utils
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -34,7 +35,7 @@ fun AppTextButton(
             containerColor = Color.Transparent,
             contentColor = Color.White
         ),
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.fillMaxWidth().background(color = Color.Transparent)
     ) {
         Row(modifier = modifier, horizontalArrangement = arrangement) {
             Text(

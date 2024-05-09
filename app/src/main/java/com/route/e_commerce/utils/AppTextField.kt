@@ -41,9 +41,9 @@ fun AppTextField(
         },
         trailingIcon = {
             if (isPassword && state.value.isNotEmpty())
-                ToggleVisibility(vm, vm.isVisible)
+                ToggleVisibility(vm, vm.isVisibleState)
         },
-        visualTransformation = if (isPassword) vm.transformation.value else VisualTransformation.None,
+        visualTransformation = if (isPassword) vm.transformationState.value else VisualTransformation.None,
         keyboardOptions =
         if (isPassword) KeyboardOptions(keyboardType = KeyboardType.Password) else KeyboardOptions(),
         placeholder = {
@@ -60,7 +60,8 @@ fun AppTextField(
             unfocusedContainerColor = Color.White,
             focusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent,
-            errorIndicatorColor = Color.Transparent
+            errorIndicatorColor = Color.Transparent,
+            cursorColor = grey
         ),
         shape = RoundedCornerShape(14.dp),
         singleLine = true,
@@ -72,7 +73,7 @@ fun AppTextField(
 
 @Composable
 fun ToggleVisibility(viewModel: LoginViewModel, isVisible: MutableState<Boolean>) {
-    viewModel.transformation.value =
+    viewModel.transformationState.value =
         if (isVisible.value) VisualTransformation.None else PasswordVisualTransformation()
 
     val onClick: () -> Unit = { isVisible.value = !isVisible.value }

@@ -17,6 +17,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.route.e_commerce.signin.LoginScreen
+import com.route.e_commerce.signup.SignupScreen
 import com.route.e_commerce.ui.theme.ECommerceTheme
 
 class HomeActivity : ComponentActivity() {
@@ -42,9 +43,18 @@ class HomeActivity : ComponentActivity() {
 
 @Composable
 fun HomeScreen() {
-    NavHost(navController = rememberNavController(), startDestination = "login") {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = "login") {
         composable(route = "login") {
-            LoginScreen()
+            LoginScreen(
+                onCreateAccount = {
+                    navController.navigate("signup")
+                }
+            )
+        }
+
+        composable(route = "signup") {
+            SignupScreen()
         }
     }
 }

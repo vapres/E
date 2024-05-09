@@ -31,7 +31,12 @@ import com.route.e_commerce.utils.AppTextButton
 import com.route.e_commerce.utils.AppTextField
 
 @Composable
-fun LoginScreen(viewModel: LoginViewModel = viewModel()) {
+fun LoginScreen(
+    viewModel: LoginViewModel = viewModel(),
+    onLoginClick: (() -> Unit)? = null,
+    onForgetPasswordClick: (() -> Unit)? = null,
+    onCreateAccount: () -> Unit
+) {
 
     Column(
         modifier = Modifier
@@ -78,7 +83,7 @@ fun LoginScreen(viewModel: LoginViewModel = viewModel()) {
         AppTextField(
             viewModel(),
             modifier = Modifier.padding(vertical = 8.dp).fillMaxWidth(),
-            state = viewModel.userName,
+            state = viewModel.userNameState,
             placeholder = R.string.enter_your_name,
         )
 
@@ -94,7 +99,7 @@ fun LoginScreen(viewModel: LoginViewModel = viewModel()) {
             viewModel(),
             modifier = Modifier.padding(top = 8.dp).fillMaxWidth(),
             placeholder = R.string.enter_your_password,
-            state = viewModel.password,
+            state = viewModel.passwordState,
             isPassword = true,
         )
         AppTextButton(
@@ -103,7 +108,9 @@ fun LoginScreen(viewModel: LoginViewModel = viewModel()) {
             arrangement = Arrangement.End,
             fontWeight = FontWeight.Normal,
             fontSize = 12.sp
-        ) {}
+        ) {
+//            onForgetPasswordClick()
+        }
 
         Spacer(Modifier.height(16.dp))
 
@@ -115,7 +122,9 @@ fun LoginScreen(viewModel: LoginViewModel = viewModel()) {
             contentColor = blue,
             contentPadding = PaddingValues(12.dp),
             shape = RoundedCornerShape(14.dp)
-        ) {}
+        ) {
+//            onLoginClick()
+        }
 
         AppTextButton(
             modifier = Modifier.padding(vertical = 16.dp),
@@ -123,12 +132,14 @@ fun LoginScreen(viewModel: LoginViewModel = viewModel()) {
             arrangement = Arrangement.Center,
             fontWeight = FontWeight.Medium,
             fontSize = 12.sp,
-        ) {}
+        ) {
+            onCreateAccount()
+        }
     }
 }
 
 @Preview(showSystemUi = true)
 @Composable
 private fun SigninScreenPreview() {
-    LoginScreen()
+    LoginScreen(viewModel(), {}, {}, {})
 }
